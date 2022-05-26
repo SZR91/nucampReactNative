@@ -35,6 +35,24 @@ export const addComments = (comments) => ({
   payload: comments,
 });
 
+export const addComment = (comment) => ({
+  type: ActionTypes.ADD_COMMENT,
+  payload: comment,
+});
+
+export const postComment = (campsiteId, rating, author, text) => (dispatch) => {
+  const newComment = {
+    campsiteId,
+    rating,
+    author,
+    text,
+  };
+  newComment.date = new Date().toISOString();
+  setTimeout(() => {
+    dispatch(addComment(newComment));
+  }, 2000);
+};
+
 export const fetchCampsites = () => (dispatch) => {
   dispatch(campsitesLoading());
 
@@ -166,20 +184,7 @@ export const addFavorite = (campsiteId) => ({
   payload: campsiteId,
 });
 
-export const postComment = (campsiteId, rating, author, text) => (dispatch) => {
-  const newComment = {
-    campsiteId,
-    rating,
-    author,
-    text,
-  };
-  newComment.date = new Date().toISOString();
-  setTimeout(() => {
-    dispatch(addComment(newComment));
-  }, 2000);
-};
-
-export const addComment = (comment) => ({
-  type: ActionTypes.ADD_COMMENT,
-  payload: comment,
+export const deleteFavorite = (campsiteId) => ({
+  type: ActionTypes.DELETE_FAVORITE,
+  payload: campsiteId,
 });
